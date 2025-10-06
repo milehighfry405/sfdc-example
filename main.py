@@ -530,6 +530,20 @@ async def root():
         "health": "/health"
     }
 
+@app.get("/debug/env")
+async def debug_env():
+    """Debug endpoint to check environment variables (REMOVE IN PRODUCTION!)"""
+    return {
+        "SF_USERNAME_set": bool(os.getenv("SF_USERNAME")),
+        "SF_PASSWORD_set": bool(os.getenv("SF_PASSWORD")),
+        "SF_SECURITY_TOKEN_set": bool(os.getenv("SF_SECURITY_TOKEN")),
+        "ANTHROPIC_API_KEY_set": bool(os.getenv("ANTHROPIC_API_KEY")),
+        "LANGCHAIN_API_KEY_set": bool(os.getenv("LANGCHAIN_API_KEY")),
+        "PORT": os.getenv("PORT"),
+        "RAILWAY_ENVIRONMENT": os.getenv("RAILWAY_ENVIRONMENT"),
+        "env_var_count": len(os.environ)
+    }
+
 # ============================================================================
 # Error Handlers
 # ============================================================================

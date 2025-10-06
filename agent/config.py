@@ -7,8 +7,9 @@ import os
 from typing import Optional
 from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# Load environment variables from .env file (local development only)
+# In production (Railway), env vars are injected directly by the platform
+load_dotenv(override=False)  # Don't override existing env vars from Railway
 
 
 class Config:
