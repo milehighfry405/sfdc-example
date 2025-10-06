@@ -1,0 +1,13 @@
+{
+  "updates": [
+    {
+      "Id": "003gL00000DHUNBQA5",
+      "Email_Status__c": "Invalid",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": "2025-10-05",
+      "Email_Verified_Date__c": null
+    }
+  ],
+  "errors": [],
+  "timestamp": "2025-10-05T12:21:44.020855"
+}

@@ -1,0 +1,50 @@
+{
+  "decisions": [
+    {
+      "account": "United Oil & Gas Corp.",
+      "confidence": "high",
+      "reasoning": "Nearly identical names with slight variation (Arther vs Arthur Soong/Song), similar email pattern (a.song@uog.com vs asong@uog.com), suggesting this is the same person with two contact records",
+      "canonical_name": "Arthur Song",
+      "contact_1": {
+        "id": "003gL00000DvAw3QAF",
+        "name": "Arther Soong",
+        "email": "a.song@uog.com",
+        "phone": null,
+        "title": null,
+        "justification": "Likely typo/variant of 'arthur song'; missing phone and title",
+        "suggested_action": "Delete"
+      },
+      "contact_2": {
+        "id": "003gL00000DHUNNQA5",
+        "name": "Arthur Song",
+        "email": "asong@uog.com",
+        "phone": "(212) 842-5500",
+        "title": "CEO",
+        "justification": "Has phone and title; valid email",
+        "suggested_action": "Keep - Not a duplicate"
+      }
+    }
+  ],
+  "updates": [
+    {
+      "Id": "003gL00000DvAw3QAF",
+      "Email_Status__c": "Duplicate",
+      "email_last_updated_date__c": "2025-10-05",
+      "Duplicate_Group_Name__c": "Arthur Song",
+      "Duplicate_Justification__c": "Likely typo/variant of 'arthur song'; missing phone and title",
+      "Suggested_Action__c": "Delete",
+      "Duplicate_Reviewed__c": false
+    },
+    {
+      "Id": "003gL00000DHUNNQA5",
+      "Email_Status__c": "Duplicate",
+      "email_last_updated_date__c": "2025-10-05",
+      "Duplicate_Group_Name__c": "Arthur Song",
+      "Duplicate_Justification__c": "Has phone and title; valid email",
+      "Suggested_Action__c": "Keep - Not a duplicate",
+      "Duplicate_Reviewed__c": false
+    }
+  ],
+  "errors": [],
+  "timestamp": "2025-10-05T12:57:53.755362"
+}

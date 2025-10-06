@@ -1,0 +1,524 @@
+{
+  "contacts": [
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNDQA5"
+      },
+      "Id": "003gL00000DHUNDQA5",
+      "FirstName": "Jack",
+      "LastName": "Rogers",
+      "Email": "jrogers@burlington.com",
+      "Phone": "(336) 222-7000",
+      "MobilePhone": null,
+      "Title": "VP, Facilities",
+      "AccountId": "001gL00000PNInTQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "Burlington Textiles Corp of America"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNFQA5"
+      },
+      "Id": "003gL00000DHUNFQA5",
+      "FirstName": "Andy",
+      "LastName": "Young",
+      "Email": "a_young@dickenson.com",
+      "Phone": "(785) 241-6200",
+      "MobilePhone": "(785) 265-5350",
+      "Title": "SVP, Operations",
+      "AccountId": "001gL00000PNInVQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "Dickenson plc"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNCQA5"
+      },
+      "Id": "003gL00000DHUNCQA5",
+      "FirstName": "Sean",
+      "LastName": "Forbes",
+      "Email": "sean@edge.com",
+      "Phone": "(512) 757-6000",
+      "MobilePhone": "(512) 757-4561",
+      "Title": "CFO",
+      "AccountId": "001gL00000PNInSQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "Edge Communications"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNBQA5"
+      },
+      "Id": "003gL00000DHUNBQA5",
+      "FirstName": "Rose",
+      "LastName": "Gonzalez",
+      "Email": "rose@edge.com",
+      "Phone": "(512) 757-6000",
+      "MobilePhone": "(512) 757-9340",
+      "Title": "SVP, Procurement",
+      "AccountId": "001gL00000PNInSQAX",
+      "LastModifiedDate": "2025-10-05T19:21:39.000+0000",
+      "Email_Status__c": "Invalid",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": "2025-10-05",
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": "550 5.4.1 Recipient address rejected: Access denied. For more information see https://aka.ms/EXOSmtpErrors [BN1PEPF0000467F.namprd03.prod.outlook.com 2025-10-05T18:50:13.740Z 08DE0366FCCF2B83]",
+      "EmailBouncedDate": "2025-10-05T18:50:13.000+0000",
+      "AccountName": "Edge Communications"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNLQA5"
+      },
+      "Id": "003gL00000DHUNLQA5",
+      "FirstName": "Josh",
+      "LastName": "Davis",
+      "Email": "j.davis@expressl&t.net",
+      "Phone": "(503) 421-7800",
+      "MobilePhone": "(503) 421-4387",
+      "Title": "Director, Warehouse Mgmt",
+      "AccountId": "001gL00000PNInYQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "Express Logistics and Transport"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNKQA5"
+      },
+      "Id": "003gL00000DHUNKQA5",
+      "FirstName": "Babara",
+      "LastName": "Levy",
+      "Email": "b.levy@expressl&t.net",
+      "Phone": "(503) 421-7800",
+      "MobilePhone": "(503) 421-5451",
+      "Title": "SVP, Operations",
+      "AccountId": "001gL00000PNInYQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "Express Logistics and Transport"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNRQA5"
+      },
+      "Id": "003gL00000DHUNRQA5",
+      "FirstName": "Edna",
+      "LastName": "Frank",
+      "Email": "efrank@genepoint.com",
+      "Phone": "(650) 867-3450",
+      "MobilePhone": "(650) 867-7686",
+      "Title": "VP, Technology",
+      "AccountId": "001gL00000PNIncQAH",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "GenePoint"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNGQA5"
+      },
+      "Id": "003gL00000DHUNGQA5",
+      "FirstName": "Tim",
+      "LastName": "Barr",
+      "Email": "barr_tim@grandhotels.com",
+      "Phone": "(312) 596-1000",
+      "MobilePhone": "(312) 596-1230",
+      "Title": "SVP, Administration and Finance",
+      "AccountId": "001gL00000PNInWQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "Grand Hotels & Resorts Ltd"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNHQA5"
+      },
+      "Id": "003gL00000DHUNHQA5",
+      "FirstName": "John",
+      "LastName": "Bond",
+      "Email": "bond_john@grandhotels.com",
+      "Phone": "(312) 596-1000",
+      "MobilePhone": "(312) 596-1563",
+      "Title": "VP, Facilities",
+      "AccountId": "001gL00000PNInWQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "Grand Hotels & Resorts Ltd"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNEQA5"
+      },
+      "Id": "003gL00000DHUNEQA5",
+      "FirstName": "Pat",
+      "LastName": "Stumuller",
+      "Email": "pat@pyramid.net",
+      "Phone": "(014) 427-4427",
+      "MobilePhone": "(014) 454-6364",
+      "Title": "SVP, Administration and Finance",
+      "AccountId": "001gL00000PNInUQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "Pyramid Construction Inc."
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNUQA5"
+      },
+      "Id": "003gL00000DHUNUQA5",
+      "FirstName": "Jake",
+      "LastName": "Llorrac",
+      "Email": null,
+      "Phone": null,
+      "MobilePhone": null,
+      "Title": null,
+      "AccountId": "001gL00000PNIndQAH",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "sForce"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNTQA5"
+      },
+      "Id": "003gL00000DHUNTQA5",
+      "FirstName": "Siddartha",
+      "LastName": "Nedaerk",
+      "Email": null,
+      "Phone": null,
+      "MobilePhone": null,
+      "Title": null,
+      "AccountId": "001gL00000PNIndQAH",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "sForce"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNJQA5"
+      },
+      "Id": "003gL00000DHUNJQA5",
+      "FirstName": "Lauren",
+      "LastName": "Boyle",
+      "Email": "lboyle@uog.com",
+      "Phone": "(212) 842-5500",
+      "MobilePhone": "(212) 842-5611",
+      "Title": "SVP, Technology",
+      "AccountId": "001gL00000PNInXQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "United Oil & Gas Corp."
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNSQA5"
+      },
+      "Id": "003gL00000DHUNSQA5",
+      "FirstName": "Avi",
+      "LastName": "Green",
+      "Email": "agreen@uog.com",
+      "Phone": "(212) 842-5500",
+      "MobilePhone": "(212) 842-2383",
+      "Title": "CFO",
+      "AccountId": "001gL00000PNInXQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "United Oil & Gas Corp."
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNIQA5"
+      },
+      "Id": "003gL00000DHUNIQA5",
+      "FirstName": "Stella",
+      "LastName": "Pavlova",
+      "Email": "spavlova@uog.com",
+      "Phone": "(212) 842-5500",
+      "MobilePhone": "(212) 842-5501",
+      "Title": "SVP, Production",
+      "AccountId": "001gL00000PNInXQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "United Oil & Gas Corp."
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNNQA5"
+      },
+      "Id": "003gL00000DHUNNQA5",
+      "FirstName": "Arthur",
+      "LastName": "Song",
+      "Email": "asong@uog.com",
+      "Phone": "(212) 842-5500",
+      "MobilePhone": "(212) 842-4535",
+      "Title": "CEO",
+      "AccountId": "001gL00000PNInXQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "United Oil & Gas Corp."
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DvAw3QAF"
+      },
+      "Id": "003gL00000DvAw3QAF",
+      "FirstName": "Arther",
+      "LastName": "Soong",
+      "Email": "a.song@uog.com",
+      "Phone": null,
+      "MobilePhone": null,
+      "Title": null,
+      "AccountId": "001gL00000PNInXQAX",
+      "LastModifiedDate": "2025-10-05T19:31:10.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": null,
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "United Oil & Gas Corp."
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNQQA5"
+      },
+      "Id": "003gL00000DHUNQQA5",
+      "FirstName": "Liz",
+      "LastName": "D'Cruz",
+      "Email": "ldcruz@uog.com",
+      "Phone": "(650) 450-8810",
+      "MobilePhone": "(650) 345-6637",
+      "Title": "VP, Production",
+      "AccountId": "001gL00000PNInbQAH",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "United Oil & Gas, Singapore"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNPQA5"
+      },
+      "Id": "003gL00000DHUNPQA5",
+      "FirstName": "Tom",
+      "LastName": "Ripley",
+      "Email": "tripley@uog.com",
+      "Phone": "(650) 450-8810",
+      "MobilePhone": "(650) 345-7636",
+      "Title": "Regional General Manager",
+      "AccountId": "001gL00000PNInbQAH",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "United Oil & Gas, Singapore"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNOQA5"
+      },
+      "Id": "003gL00000DHUNOQA5",
+      "FirstName": "Ashley",
+      "LastName": "James",
+      "Email": "ajames@uog.com",
+      "Phone": "+44 191 4956203",
+      "MobilePhone": "+44 191 3456234",
+      "Title": "VP, Finance",
+      "AccountId": "001gL00000PNInaQAH",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "United Oil & Gas, UK"
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v59.0/sobjects/Contact/003gL00000DHUNMQA5"
+      },
+      "Id": "003gL00000DHUNMQA5",
+      "FirstName": "Jane",
+      "LastName": "Grey",
+      "Email": "jane_gray@uoa.edu",
+      "Phone": "(520) 773-9050",
+      "MobilePhone": "(520) 773-4539",
+      "Title": "Dean of Administration",
+      "AccountId": "001gL00000PNInZQAX",
+      "LastModifiedDate": "2025-10-05T19:13:00.000+0000",
+      "Email_Status__c": "Unknown",
+      "email_last_updated_date__c": "2025-10-05",
+      "Email_Bounced_Date__c": null,
+      "Email_Verified_Date__c": null,
+      "EmailBouncedReason": null,
+      "EmailBouncedDate": null,
+      "AccountName": "University of Arizona"
+    }
+  ],
+  "activities": {
+    "003gL00000DHUNBQA5": [
+      {
+        "type": "Task",
+        "status": "Completed",
+        "date": "2025-10-05T18:50:12.000+0000",
+        "subject": "Email: test",
+        "description": "To: rose@edge.com\nCC: \nBCC: milehighfry405@gmail.com\nAttachment: --none--\n\nSubject: test\nBody:\n_____________________________________________________________________\nPowered by Salesforce\nhttp://www.salesforce.com/"
+      }
+    ]
+  },
+  "grouped_contacts": {
+    "001gL00000PNInTQAX": [
+      "003gL00000DHUNDQA5"
+    ],
+    "001gL00000PNInVQAX": [
+      "003gL00000DHUNFQA5"
+    ],
+    "001gL00000PNInSQAX": [
+      "003gL00000DHUNCQA5",
+      "003gL00000DHUNBQA5"
+    ],
+    "001gL00000PNInYQAX": [
+      "003gL00000DHUNLQA5",
+      "003gL00000DHUNKQA5"
+    ],
+    "001gL00000PNIncQAH": [
+      "003gL00000DHUNRQA5"
+    ],
+    "001gL00000PNInWQAX": [
+      "003gL00000DHUNGQA5",
+      "003gL00000DHUNHQA5"
+    ],
+    "001gL00000PNInUQAX": [
+      "003gL00000DHUNEQA5"
+    ],
+    "001gL00000PNIndQAH": [
+      "003gL00000DHUNUQA5",
+      "003gL00000DHUNTQA5"
+    ],
+    "001gL00000PNInXQAX": [
+      "003gL00000DHUNJQA5",
+      "003gL00000DHUNSQA5",
+      "003gL00000DHUNIQA5",
+      "003gL00000DHUNNQA5",
+      "003gL00000DvAw3QAF"
+    ],
+    "001gL00000PNInbQAH": [
+      "003gL00000DHUNQQA5",
+      "003gL00000DHUNPQA5"
+    ],
+    "001gL00000PNInaQAH": [
+      "003gL00000DHUNOQA5"
+    ],
+    "001gL00000PNInZQAX": [
+      "003gL00000DHUNMQA5"
+    ]
+  }
+}

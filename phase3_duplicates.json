@@ -1,0 +1,17 @@
+{
+  "duplicates_by_account": {
+    "001gL00000PNInXQAX": {
+      "account_name": "United Oil & Gas Corp.",
+      "duplicates": [
+        {
+          "contact_id_1": "003gL00000DvAw3QAF",
+          "contact_id_2": "003gL00000DHUNNQA5",
+          "confidence": "high",
+          "reasoning": "Nearly identical names with slight variation (Arther vs Arthur Soong/Song), similar email pattern (a.song@uog.com vs asong@uog.com), suggesting this is the same person with two contact records"
+        }
+      ]
+    }
+  },
+  "total_pairs": 1,
+  "timestamp": null
+}
