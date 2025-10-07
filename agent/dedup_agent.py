@@ -146,10 +146,9 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
         if len(all_duplicate_pairs) > 0:
             # Get first duplicate pair for preview
             first_pair = all_duplicate_pairs[0]
-            contact1 = contacts_dict.get(first_pair["contact_1_id"])
-            contact2 = contacts_dict.get(first_pair["contact_2_id"])
-            c1_name = f"{contact1.get('FirstName', '')} {contact1.get('LastName', '')}" if contact1 else "Unknown"
-            c2_name = f"{contact2.get('FirstName', '')} {contact2.get('LastName', '')}" if contact2 else "Unknown"
+            # Duplicate pairs have nested contact_1 and contact_2 objects
+            c1_name = first_pair.get("contact_1", {}).get("name", "Unknown")
+            c2_name = first_pair.get("contact_2", {}).get("name", "Unknown")
 
             update_progress("phase_4_detect", 4,
                 f"⚠️ Found {len(all_duplicate_pairs)} potential duplicate pair(s)\n" +
