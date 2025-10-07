@@ -55,3 +55,6 @@ reports/
 # Don't commit cost reports or dashboards (contain sensitive data)
 cost_report.json
 dashboard.html
+
+# Nested repositories (finora-live has its own repo)
+finora-live/

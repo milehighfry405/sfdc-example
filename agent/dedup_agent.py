@@ -69,16 +69,17 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
 
     try:
         # PHASE 1: Connect to Salesforce
-        update_progress("phase_1_connect", 1, "Connecting to Salesforce...")
+        update_progress("phase_1_connect", 1, "🔗 Connecting to Salesforce...")
 
         conn_result = tools.connect_to_salesforce()
         if conn_result["status"] != "success":
             raise Exception(conn_result["message"])
 
         sf_connection = conn_result["connection"]
+        update_progress("phase_1_connect", 1, "✅ Connected to Salesforce successfully")
 
         # PHASE 2: Extract Contacts
-        update_progress("phase_2_extract", 2, "Extracting contacts grouped by Account Owner...")
+        update_progress("phase_2_extract", 2, "📥 Extracting contacts from Salesforce...")
 
         extraction_result = tools.extract_contacts(
             sf_connection,
@@ -95,8 +96,16 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
         # Create contacts lookup dict
         contacts_dict = {c['Id']: c for c in extraction_result['all_contacts']}
 
+        # Show sample data
+        sample_contacts = list(extraction_result['all_contacts'][:3])
+        sample_names = [f"{c.get('FirstName', '')} {c.get('LastName', '')}" for c in sample_contacts]
+
+        update_progress("phase_2_extract", 2,
+            f"✅ Found {metrics['total_contacts']} contacts across {metrics['total_owners']} account owner(s)\n" +
+            f"Sample contacts: {', '.join(sample_names)}" + ("..." if metrics['total_contacts'] > 3 else ""))
+
         # PHASE 3: Email Validation
-        update_progress("phase_3_validate", 3, f"Validating {metrics['total_contacts']} email addresses...")
+        update_progress("phase_3_validate", 3, f"📧 Validating {metrics['total_contacts']} email addresses...")
 
         contact_ids = list(contacts_dict.keys())
         activities = tools.extract_email_activities(sf_connection, contact_ids)
@@ -107,9 +116,10 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
         )
 
         metrics["emails_validated"] = validation_result["total_processed"]
+        update_progress("phase_3_validate", 3, f"✅ Validated {metrics['emails_validated']} email addresses")
 
         # PHASE 4: Duplicate Detection
-        update_progress("phase_4_detect", 4, f"Detecting duplicates across {metrics['total_owners']} Account Owners...")
+        update_progress("phase_4_detect", 4, f"🔍 Analyzing {metrics['total_contacts']} contacts for potential duplicates...")
 
         all_duplicate_pairs = []
         duplicates_by_owner = {}
@@ -132,8 +142,25 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
 
         metrics["duplicates_found"] = len(all_duplicate_pairs)
 
+        # Show what we found
+        if len(all_duplicate_pairs) > 0:
+            # Get first duplicate pair for preview
+            first_pair = all_duplicate_pairs[0]
+            contact1 = contacts_dict.get(first_pair["contact_1_id"])
+            contact2 = contacts_dict.get(first_pair["contact_2_id"])
+            c1_name = f"{contact1.get('FirstName', '')} {contact1.get('LastName', '')}" if contact1 else "Unknown"
+            c2_name = f"{contact2.get('FirstName', '')} {contact2.get('LastName', '')}" if contact2 else "Unknown"
+
+            update_progress("phase_4_detect", 4,
+                f"⚠️ Found {len(all_duplicate_pairs)} potential duplicate pair(s)\n" +
+                f"Example: '{c1_name}' vs '{c2_name}'" +
+                (f" (+ {len(all_duplicate_pairs) - 1} more)" if len(all_duplicate_pairs) > 1 else ""))
+        else:
+            update_progress("phase_4_detect", 4, "✅ No duplicates detected - all contacts appear unique")
+
         # PHASE 5: Prepare Duplicate Marking
-        update_progress("phase_5_mark", 5, f"Preparing to mark {len(all_duplicate_pairs)} duplicate pairs...")
+        if len(all_duplicate_pairs) > 0:
+            update_progress("phase_5_mark", 5, f"📝 Preparing to mark {len(all_duplicate_pairs)} duplicate pair(s)...")
 
         marking_result = None
         all_updates = validation_result['updates']
@@ -146,7 +173,9 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
 
             # If not auto_approve, wait for human approval
             if not auto_approve and job_manager:
-                update_progress("awaiting_approval", 5, "Awaiting human approval for duplicate marking...")
+                update_progress("awaiting_approval", 5,
+                    f"⏸️ Pausing for your approval\n" +
+                    f"I found {len(all_duplicate_pairs)} duplicate pair(s) - want me to mark them?")
 
                 import asyncio
                 loop = asyncio.new_event_loop()
@@ -181,7 +210,7 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
 
         # PHASE 6: Update Salesforce
         if len(all_updates) > 0:
-            update_progress("phase_6_update", 6, f"Updating {len(all_updates)} contacts in Salesforce...")
+            update_progress("phase_6_update", 6, f"💾 Ready to update {len(all_updates)} contact(s) in Salesforce...")
 
             # If not auto_approve, wait for final approval
             if not auto_approve and job_manager:
@@ -204,6 +233,7 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
                 loop.close()
 
                 if not approved:
+                    update_progress("phase_6_update", 6, "❌ Update cancelled by user")
                     return {
                         "status": "cancelled",
                         "message": "Job cancelled by user",
@@ -211,18 +241,20 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
                     }
 
             # Execute updates
+            update_progress("phase_6_update", 6, f"⏳ Updating {len(all_updates)} contact(s) in Salesforce...")
             update_result = tools.update_salesforce_contacts(
                 sf_connection,
                 all_updates
             )
 
             metrics["sfdc_updates"] = update_result["success_count"]
+            update_progress("phase_6_update", 6, f"✅ Successfully updated {metrics['sfdc_updates']} contact(s)")
 
             if update_result["error_count"] > 0:
                 metrics["errors"] = update_result["errors"]
 
         # PHASE 7: Generate Reports
-        update_progress("phase_7_reports", 7, "Generating reports...")
+        update_progress("phase_7_reports", 7, "📄 Generating reports...")
 
         if len(all_duplicate_pairs) > 0:
             _generate_owner_reports(
@@ -245,6 +277,13 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
 
         # Final metrics
         metrics["end_time"] = datetime.now().isoformat()
+
+        # Final summary message
+        update_progress("completed", 7,
+            f"🎉 All done!\n" +
+            f"• Processed {metrics['total_contacts']} contacts\n" +
+            f"• Found {len(all_duplicate_pairs)} duplicate pair(s)\n" +
+            f"• Updated {metrics['sfdc_updates']} contact(s) in Salesforce")
 
         return {
             "status": "success",
