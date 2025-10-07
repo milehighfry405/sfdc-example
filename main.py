@@ -130,6 +130,10 @@ class JobManager:
                     "duplicates_found": 0,
                     "sfdc_updates": 0
                 },
+                "phase_details": {
+                    # Stores detailed data for each completed phase
+                    # e.g. "phase_1_connect": {...}, "phase_2_extract": {...}
+                },
                 "pending_approval": None,
                 "results": None,
                 "error": None,
@@ -389,6 +393,29 @@ async def list_jobs():
     """List all jobs"""
     jobs = await job_manager.list_jobs()
     return {"jobs": jobs}
+
+@app.get("/api/dedup/{job_id}/phase/{phase_name}")
+async def get_phase_details(job_id: str, phase_name: str):
+    """Get detailed data for a specific phase of a job"""
+    job = await job_manager.get_job(job_id)
+
+    if not job:
+        raise HTTPException(status_code=404, detail=f"Job {job_id} not found")
+
+    phase_details = job.get("phase_details", {})
+
+    if phase_name not in phase_details:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Phase '{phase_name}' not found or not yet completed"
+        )
+
+    return {
+        "job_id": job_id,
+        "phase": phase_name,
+        "details": phase_details[phase_name],
+        "timestamp": phase_details[phase_name].get("timestamp")
+    }
 
 @app.post("/api/dedup/approve", response_model=ApprovalResponse)
 async def approve_decision(request: ApprovalRequest):

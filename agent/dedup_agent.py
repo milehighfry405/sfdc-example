@@ -67,6 +67,33 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
             except Exception as e:
                 print(f"Error updating progress: {e}")
 
+    def save_phase_details(phase: str, details: dict):
+        """Save detailed data for a completed phase"""
+        if job_manager:
+            import asyncio
+            try:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+
+                # Get current job state
+                job = loop.run_until_complete(job_manager.get_job(job_id))
+                if job:
+                    phase_details = job.get("phase_details", {})
+                    phase_details[phase] = {
+                        **details,
+                        "timestamp": datetime.now().isoformat()
+                    }
+
+                    loop.run_until_complete(
+                        job_manager.update_job(job_id, {
+                            "phase_details": phase_details
+                        })
+                    )
+
+                loop.close()
+            except Exception as e:
+                print(f"Error saving phase details: {e}")
+
     try:
         # PHASE 1: Connect to Salesforce
         update_progress("phase_1_connect", 1, "🔗 Connecting to Salesforce...")
@@ -77,6 +104,16 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
 
         sf_connection = conn_result["connection"]
         update_progress("phase_1_connect", 1, "✅ Connected to Salesforce successfully")
+
+        # Save phase details
+        save_phase_details("phase_1_connect", {
+            "status": "success",
+            "message": "Connected to Salesforce successfully",
+            "org_info": {
+                "username": config.SF_USERNAME.split('@')[0] + "@***",  # Partial mask
+                "instance": str(sf_connection.sf_instance) if hasattr(sf_connection, 'sf_instance') else "unknown"
+            }
+        })
 
         # PHASE 2: Extract Contacts
         update_progress("phase_2_extract", 2, "📥 Extracting contacts from Salesforce...")
@@ -104,6 +141,33 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
             f"✅ Found {metrics['total_contacts']} contacts across {metrics['total_owners']} account owner(s)\n" +
             f"Sample contacts: {', '.join(sample_names)}" + ("..." if metrics['total_contacts'] > 3 else ""))
 
+        # Save phase details with full contact list
+        save_phase_details("phase_2_extract", {
+            "status": "success",
+            "total_contacts": metrics['total_contacts'],
+            "total_owners": metrics['total_owners'],
+            "contacts": [
+                {
+                    "id": c['Id'],
+                    "name": f"{c.get('FirstName', '')} {c.get('LastName', '')}".strip(),
+                    "email": c.get('Email', ''),
+                    "phone": c.get('Phone', ''),
+                    "account": c.get('AccountName', ''),
+                    "title": c.get('Title', ''),
+                    "owner": c.get('AccountOwnerName', '')
+                }
+                for c in extraction_result['all_contacts']
+            ],
+            "accounts_by_owner": [
+                {
+                    "owner_id": owner_id,
+                    "owner_name": extraction_result["owner_metadata"][owner_id]["owner_name"],
+                    "contact_count": len(contacts)
+                }
+                for owner_id, contacts in extraction_result["contacts_by_owner"].items()
+            ]
+        })
+
         # PHASE 3: Email Validation
         update_progress("phase_3_validate", 3, f"📧 Validating {metrics['total_contacts']} email addresses...")
 
@@ -117,6 +181,24 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
 
         metrics["emails_validated"] = validation_result["total_processed"]
         update_progress("phase_3_validate", 3, f"✅ Validated {metrics['emails_validated']} email addresses")
+
+        # Save phase details with validation results
+        save_phase_details("phase_3_validate", {
+            "status": "success",
+            "total_validated": metrics['emails_validated'],
+            "validation_logic": "Checked email format, bounced emails from activity history, and duplicate emails",
+            "results": [
+                {
+                    "contact_id": upd.get('Id'),
+                    "contact_name": f"{contacts_dict[upd['Id']].get('FirstName', '')} {contacts_dict[upd['Id']].get('LastName', '')}".strip() if upd.get('Id') in contacts_dict else "Unknown",
+                    "email": contacts_dict[upd['Id']].get('Email', '') if upd.get('Id') in contacts_dict else "",
+                    "status": upd.get('Email_Validity__c', 'unknown'),
+                    "reason": upd.get('Email_Validity_Reason__c', '')
+                }
+                for upd in validation_result.get('updates', [])
+                if upd.get('Email_Validity__c') or upd.get('Email_Validity_Reason__c')
+            ]
+        })
 
         # PHASE 4: Duplicate Detection
         update_progress("phase_4_detect", 4, f"🔍 Analyzing {metrics['total_contacts']} contacts for potential duplicates...")
@@ -156,6 +238,16 @@ def run_agent_workflow(job_id: str, job_config: dict, job_manager=None):
                 (f" (+ {len(all_duplicate_pairs) - 1} more)" if len(all_duplicate_pairs) > 1 else ""))
         else:
             update_progress("phase_4_detect", 4, "✅ No duplicates detected - all contacts appear unique")
+
+        # Save phase details with duplicate analysis
+        save_phase_details("phase_4_detect", {
+            "status": "success",
+            "total_duplicates_found": len(all_duplicate_pairs),
+            "analysis_logic": "Compared contacts within same account using name similarity, email patterns, phone numbers, and titles. Used Claude AI for intelligent matching including typo detection.",
+            "duplicate_pairs": all_duplicate_pairs,  # Full pairs with reasoning
+            "comparison_fields": ["Name", "Email", "Phone", "Mobile", "Title", "Last Modified Date"],
+            "ai_model": "claude-3-5-haiku-20241022"
+        })
 
         # PHASE 5: Prepare Duplicate Marking
         if len(all_duplicate_pairs) > 0:
