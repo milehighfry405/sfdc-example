@@ -457,15 +457,69 @@ async def get_pending_approval(job_id: str):
     if not job:
         raise HTTPException(status_code=404, detail=f"Job {job_id} not found")
 
-    if not job.get("pending_approval"):
+    # Check if there's pending_approval data
+    approval_data = job.get("pending_approval")
+
+    # If no pending_approval, try to get duplicate pairs from phase_details
+    if not approval_data or not approval_data.get("decisions"):
+        phase_details = job.get("phase_details", {})
+        phase_4_data = phase_details.get("phase_4_detect", {})
+
+        if phase_4_data and phase_4_data.get("duplicate_pairs"):
+            # Convert phase_4 duplicate pairs to the format expected for approval
+            # Phase 4 format: {contact_id_1, contact_id_2, confidence, reasoning, account_name}
+            # Need to transform to: {contact_1: {id, name, email}, contact_2: {...}}
+
+            # Get contact details from phase_2
+            phase_2_data = phase_details.get("phase_2_extract", {})
+            contacts_list = phase_2_data.get("contacts", [])
+            contacts_by_id = {c["id"]: c for c in contacts_list}
+
+            duplicate_pairs = []
+            for pair in phase_4_data["duplicate_pairs"]:
+                contact_1_id = pair.get("contact_id_1")
+                contact_2_id = pair.get("contact_id_2")
+
+                contact_1_data = contacts_by_id.get(contact_1_id, {})
+                contact_2_data = contacts_by_id.get(contact_2_id, {})
+
+                duplicate_pairs.append(DuplicatePair(
+                    pair_id=f"{contact_1_id}_{contact_2_id}",
+                    account_name=pair.get("account_name", "Unknown"),
+                    confidence=pair.get("confidence", "unknown"),
+                    reasoning=pair.get("reasoning", ""),
+                    canonical_name=pair.get("canonical_name", ""),
+                    contact_1={
+                        "id": contact_1_id,
+                        "name": contact_1_data.get("name", "Unknown"),
+                        "email": contact_1_data.get("email", ""),
+                        "phone": contact_1_data.get("phone", ""),
+                        "title": contact_1_data.get("title", "")
+                    },
+                    contact_2={
+                        "id": contact_2_id,
+                        "name": contact_2_data.get("name", "Unknown"),
+                        "email": contact_2_data.get("email", ""),
+                        "phone": contact_2_data.get("phone", ""),
+                        "title": contact_2_data.get("title", "")
+                    }
+                ))
+
+            return PendingApproval(
+                job_id=job_id,
+                stage="duplicate_review",
+                total_updates=len(duplicate_pairs),
+                duplicate_pairs=duplicate_pairs,
+                message=f"Found {len(duplicate_pairs)} duplicate pair(s) for review"
+            )
+
+        # No duplicates found anywhere
         raise HTTPException(
             status_code=404,
-            detail=f"No pending approval for job {job_id}"
+            detail=f"No pending approval or duplicates found for job {job_id}"
         )
 
-    approval_data = job["pending_approval"]
-
-    # Convert decisions to DuplicatePair models
+    # Standard path: use pending_approval data with decisions
     duplicate_pairs = [
         DuplicatePair(
             pair_id=f"{d['contact_1']['id']}_{d['contact_2']['id']}",
