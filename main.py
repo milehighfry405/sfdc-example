@@ -475,13 +475,30 @@ async def get_pending_approval(job_id: str):
             contacts_list = phase_2_data.get("contacts", [])
             contacts_by_id = {c["id"]: c for c in contacts_list}
 
+            # Also create case-insensitive prefix lookup for Salesforce ID variations
+            # SFDC IDs can be 15 or 18 chars, case variations exist
+            contacts_by_prefix = {}
+            for c in contacts_list:
+                # Use first 15 chars (case-insensitive) as key
+                prefix = c["id"][:15].upper()
+                contacts_by_prefix[prefix] = c
+
+            def find_contact(contact_id):
+                """Find contact by ID, trying exact match then prefix match"""
+                # Try exact match first
+                if contact_id in contacts_by_id:
+                    return contacts_by_id[contact_id]
+                # Try prefix match (first 15 chars, case-insensitive)
+                prefix = contact_id[:15].upper() if contact_id else ""
+                return contacts_by_prefix.get(prefix, {})
+
             duplicate_pairs = []
             for pair in phase_4_data["duplicate_pairs"]:
                 contact_1_id = pair.get("contact_id_1")
                 contact_2_id = pair.get("contact_id_2")
 
-                contact_1_data = contacts_by_id.get(contact_1_id, {})
-                contact_2_data = contacts_by_id.get(contact_2_id, {})
+                contact_1_data = find_contact(contact_1_id)
+                contact_2_data = find_contact(contact_2_id)
 
                 duplicate_pairs.append(DuplicatePair(
                     pair_id=f"{contact_1_id}_{contact_2_id}",
